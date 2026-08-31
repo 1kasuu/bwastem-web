@@ -1,0 +1,447 @@
+/* ======================================================= */
+/* ================ HALAMAN BUAT LAPORAN ==================== */
+/* ======================================================= */
+/* Catatan: .page-hero kini ada di main.css agar bisa dipakai bersama */
+/* oleh halaman Buat Laporan & Peta Laporan. */
+
+.form-section {
+    padding-block: var(--section-padding);
+}
+
+.form-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+    align-items: start;
+}
+
+/* ---------- Kartu form & fieldset ---------- */
+
+.form-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+}
+
+.form-fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.form-fieldset + .form-fieldset {
+    margin-top: clamp(1.75rem, 1.5rem + 1vw, 2.5rem);
+    padding-top: clamp(1.75rem, 1.5rem + 1vw, 2.5rem);
+    border-top: 1px dashed rgba(31, 41, 55, 0.15);
+}
+
+.fieldset-legend {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.05rem, 1rem + 0.3vw, 1.25rem);
+    margin-bottom: clamp(1.1rem, 1rem + 0.5vw, 1.5rem);
+    padding: 0;
+}
+
+.fieldset-legend .step-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    background: rgba(2, 136, 209, 0.12);
+    color: var(--primary);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin-bottom: clamp(1.1rem, 1rem + 0.4vw, 1.4rem);
+}
+
+.field:last-child {
+    margin-bottom: 0;
+}
+
+.field label {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.92rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.field .optional-tag {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.78rem;
+    color: #9CA3AF;
+}
+
+.field .hint {
+    font-size: 0.8rem;
+    color: #6B7280;
+}
+
+.field input[type="text"],
+.field input[type="tel"],
+.field textarea,
+.field select {
+    width: 100%;
+    border: 1.5px solid #E5E7EB;
+    border-radius: var(--radius-sm);
+    padding: 0.8rem 1rem;
+    background: #FCFCFD;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.field input[type="text"]:focus,
+.field input[type="tel"]:focus,
+.field textarea:focus,
+.field select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(2, 136, 209, 0.12);
+}
+
+.field textarea {
+    resize: vertical;
+    min-height: 6.5rem;
+}
+
+.char-counter {
+    align-self: flex-end;
+    font-size: 0.78rem;
+    color: #9CA3AF;
+}
+
+/* ---------- Upload foto/video ---------- */
+
+.upload-zone {
+    position: relative;
+    border: 2px dashed rgba(2, 136, 209, 0.35);
+    border-radius: var(--radius-md);
+    padding: clamp(1.5rem, 1.3rem + 1vw, 2.25rem) 1.25rem;
+    text-align: center;
+    background: rgba(2, 136, 209, 0.03);
+    transition: border-color 160ms ease, background-color 160ms ease;
+    cursor: pointer;
+}
+
+.upload-zone:hover,
+.upload-zone.is-dragover {
+    border-color: var(--primary);
+    background: rgba(2, 136, 209, 0.07);
+}
+
+.upload-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.upload-zone svg {
+    width: 2.4rem;
+    height: 2.4rem;
+    stroke: var(--primary);
+    margin-inline: auto;
+    margin-bottom: 0.6rem;
+}
+
+.upload-zone strong {
+    font-family: var(--font-display);
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.upload-zone p {
+    font-size: 0.82rem;
+    color: #6B7280;
+}
+
+.upload-filename {
+    margin-top: 0.9rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--secondary-dark);
+    background: rgba(67, 160, 71, 0.1);
+    padding: 0.5rem 0.9rem;
+    border-radius: var(--radius-pill);
+}
+
+.upload-filename.is-visible {
+    display: inline-flex;
+}
+
+/* ---------- Pilihan tingkat keparahan ---------- */
+
+.severity-group {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.severity-option {
+    position: relative;
+}
+
+.severity-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.severity-option input:focus-visible + label {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.severity-option label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    text-align: center;
+    padding: 0.9rem 0.5rem;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid #E5E7EB;
+    cursor: pointer;
+    transition: all 160ms ease;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.severity-option .dot {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+}
+
+.severity-option--low .dot { background: var(--severity-low); }
+.severity-option--medium .dot { background: var(--severity-medium); }
+.severity-option--high .dot { background: var(--severity-high); }
+
+.severity-option--low input:checked + label {
+    border-color: var(--severity-low);
+    background: rgba(67, 160, 71, 0.08);
+}
+
+.severity-option--medium input:checked + label {
+    border-color: var(--severity-medium);
+    background: rgba(245, 166, 35, 0.1);
+}
+
+.severity-option--high input:checked + label {
+    border-color: var(--severity-high);
+    background: rgba(229, 57, 53, 0.08);
+}
+
+.severity-option label:hover {
+    box-shadow: var(--shadow-sm);
+}
+
+/* ---------- Mini map pemilih lokasi ---------- */
+
+.map-picker-shell {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1.5px solid #E5E7EB;
+    /* Mengurung z-index internal Leaflet (pane marker/popup bisa sampai ~700) */
+    /* supaya tidak pernah menimpa navbar sticky saat halaman di-scroll. */
+    isolation: isolate;
+}
+
+.map-picker {
+    width: 100%;
+    height: clamp(16rem, 14rem + 8vw, 22rem);
+}
+
+.map-coords {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    color: #4B5563;
+    background: #F3F4F6;
+    padding: 0.6rem 0.9rem;
+    border-radius: var(--radius-sm);
+}
+
+.map-coords svg {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    stroke: var(--primary);
+}
+
+.map-coords strong {
+    color: var(--text-color);
+}
+
+/* ---------- Tombol aksi form ---------- */
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.85rem;
+    margin-top: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+}
+
+/* ---------- Sidebar ringkasan & tips ---------- */
+
+.sidebar-stack {
+    position: sticky;
+    top: clamp(5.5rem, 5rem + 1.5vw, 6.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.summary-card {
+    background: linear-gradient(160deg, var(--primary-light), var(--primary));
+    color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+    box-shadow: var(--shadow-primary);
+}
+
+.summary-card h3 {
+    color: var(--white);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.summary-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    font-size: 0.88rem;
+}
+
+.summary-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.summary-list li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.summary-list span:first-child {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.summary-list span:last-child {
+    font-weight: 600;
+    text-align: right;
+}
+
+.tips-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+    box-shadow: var(--shadow-sm);
+}
+
+.tips-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.9rem;
+}
+
+.tips-card ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.tips-card li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.86rem;
+    color: #4B5563;
+}
+
+.tips-card svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    stroke: var(--secondary);
+}
+
+/* ---------- Toast konfirmasi kirim ---------- */
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: clamp(1.25rem, 1rem + 1vw, 2rem);
+    transform: translateX(-50%);
+    background: var(--text-color);
+    color: var(--white);
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-md);
+    display: none;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: var(--shadow-md);
+    z-index: 200;
+    max-width: min(90vw, 26rem);
+    animation: toast-in 220ms ease;
+}
+
+.toast.is-visible {
+    display: flex;
+}
+
+.toast svg {
+    width: 1.4rem;
+    height: 1.4rem;
+    stroke: var(--secondary-light);
+    flex-shrink: 0;
+}
+
+/* ---------- Responsif ---------- */
+
+@media (max-width: 900px) {
+    .form-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar-stack {
+        position: static;
+    }
+}
+
+@media (max-width: 520px) {
+    .severity-group {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
+}

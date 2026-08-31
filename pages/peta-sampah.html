@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<script>document.documentElement.classList.add("js");</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peta Laporan — Bali Waste Management</title>
+    <meta name="description" content="Pantau titik-titik sampah yang dilaporkan masyarakat di seluruh Bali lewat peta interaktif, lengkap dengan filter kategori dan tingkat keparahan.">
+
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/keyframe.css">
+    <link rel="stylesheet" href="../css/map.css">
+
+    <link rel="icon" type="image/png" href="../favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="shortcut icon" href="../favicon.ico" />
+
+    <!-- Leaflet.js + OpenStreetMap: peta interaktif gratis, tanpa API key -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Langsung ke konten utama</a>
+
+    <header class="site-header">
+        <nav>
+            <a class="web-logo" href="../index.html">
+                <img src="../media/logo.png" alt="Logo Bali Waste Management">
+                <span>Bali Waste Management</span>
+            </a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="Buka menu navigasi">
+                <span></span><span></span><span></span>
+            </button>
+            <ul id="primary-menu">
+                <li><a href="../index.html#beranda">Beranda</a></li>
+                <li><a href="./buat-laporan.html">Buat Laporan</a></li>
+                <li><a href="./peta-sampah.html" class="active">Peta Laporan</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero">
+            <div class="container">
+                <span class="section-eyebrow">Pantau Sebaran Laporan</span>
+                <h1>Peta Laporan Sampah Bali</h1>
+                <p>Lihat titik-titik sampah yang dilaporkan masyarakat di seluruh Bali. Gunakan filter untuk fokus pada kategori atau tingkat keparahan tertentu.</p>
+            </div>
+        </section>
+
+        <section class="map-section">
+            <div class="container">
+                <button type="button" class="filter-toggle" id="filter-toggle" aria-expanded="false" aria-controls="filter-bar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+                    Filter Laporan
+                </button>
+
+                <div class="filter-bar" id="filter-bar">
+                    <div class="filter-group">
+                        <span class="filter-group-title">Tingkat Keparahan</span>
+                        <div class="filter-chips">
+                            <div class="filter-chip filter-chip--low">
+                                <input type="checkbox" id="fs-low" name="filter-severity" value="low">
+                                <label for="fs-low"><span class="dot"></span>Rendah</label>
+                            </div>
+                            <div class="filter-chip filter-chip--medium">
+                                <input type="checkbox" id="fs-medium" name="filter-severity" value="medium">
+                                <label for="fs-medium"><span class="dot"></span>Sedang</label>
+                            </div>
+                            <div class="filter-chip filter-chip--high">
+                                <input type="checkbox" id="fs-high" name="filter-severity" value="high">
+                                <label for="fs-high"><span class="dot"></span>Tinggi</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <span class="filter-group-title">Kategori Sampah</span>
+                        <div class="filter-chips">
+                            <div class="filter-chip">
+                                <input type="checkbox" id="fc-organik" name="filter-category" value="organik">
+                                <label for="fc-organik">Organik</label>
+                            </div>
+                            <div class="filter-chip">
+                                <input type="checkbox" id="fc-anorganik" name="filter-category" value="anorganik">
+                                <label for="fc-anorganik">Anorganik</label>
+                            </div>
+                            <div class="filter-chip">
+                                <input type="checkbox" id="fc-elektronik" name="filter-category" value="elektronik">
+                                <label for="fc-elektronik">Elektronik</label>
+                            </div>
+                            <div class="filter-chip">
+                                <input type="checkbox" id="fc-b3" name="filter-category" value="b3">
+                                <label for="fc-b3">Limbah B3</label>
+                            </div>
+                            <div class="filter-chip">
+                                <input type="checkbox" id="fc-medis" name="filter-category" value="medis">
+                                <label for="fc-medis">Medis</label>
+                            </div>
+                            <div class="filter-chip">
+                                <input type="checkbox" id="fc-lainnya" name="filter-category" value="lainnya">
+                                <label for="fc-lainnya">Lainnya</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-actions">
+                        <span class="results-count" id="results-count-value">Menampilkan laporan...</span>
+                        <button type="button" class="filter-reset" id="filter-reset">Reset Filter</button>
+                    </div>
+                </div>
+
+                <div class="map-shell">
+                    <div id="map-laporan" class="leaflet-map"></div>
+                </div>
+
+                <div class="map-legend">
+                    <div class="legend-item"><span class="legend-dot legend-dot--low"></span>Keparahan Rendah</div>
+                    <div class="legend-item"><span class="legend-dot legend-dot--medium"></span>Keparahan Sedang</div>
+                    <div class="legend-item"><span class="legend-dot legend-dot--high"></span>Keparahan Tinggi</div>
+                </div>
+                <p class="stat-note">*Data pada peta merupakan contoh ilustrasi. Laporan berstatus "Selesai" akan otomatis hilang dari peta beberapa hari setelah ditangani.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a class="web-logo" href="../index.html">
+                        <img src="../media/logo.png" alt="Logo Bali Waste Management">
+                        <span>Bali Waste Management</span>
+                    </a>
+                    <p>Terima kasih telah meluangkan waktu untuk melaporkan dan membantu membersihkan Bali dari masalah sampah. Setiap laporan sangat berarti bagi lingkungan kita.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram Bali Waste Management"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
+                        <a href="#" aria-label="TikTok Bali Waste Management"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M14 3v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.5 2 4 4.5 4.3"/></svg></a>
+                        <a href="#" aria-label="Facebook Bali Waste Management"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M15 8h2V5h-2a4 4 0 0 0-4 4v2H9v3h2v7h3v-7h2.2l.8-3H14V9a1 1 0 0 1 1-1Z"/></svg></a>
+                        <a href="#" aria-label="YouTube Bali Waste Management"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="m10 9.5 5 2.5-5 2.5Z" fill="currentColor" stroke="none"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer-menu">
+                    <h3 class="footer-heading">Menu Utama</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#beranda">Beranda</a></li>
+                        <li><a href="./buat-laporan.html">Buat Laporan</a></li>
+                        <li><a href="./peta-sampah.html">Peta Laporan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact-wrap">
+                    <h3 class="footer-heading">Kontak Admin</h3>
+                    <ul class="footer-contact">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 6 8 7 8-7"/></svg><span>admin@baliwastemanagement.id</span></li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg><span>+62 812-3456-7890</span></li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 22s7-6.5 7-12A7 7 0 0 0 5 10c0 5.5 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Denpasar, Bali, Indonesia</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; <span id="footer-year">2026</span> Bali Waste Management. Hak cipta dilindungi.</span>
+                <span>Dibuat untuk proyek akhir semester.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Leaflet.js: library peta open-source, dimuat lewat CDN tanpa API key -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script defer src="../js/main.js"></script>
+    <script defer src="../js/peta.js"></script>
+</body>
+</html>

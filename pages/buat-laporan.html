@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<script>document.documentElement.classList.add("js");</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buat Laporan — Bali Waste Management</title>
+    <meta name="description" content="Laporkan titik sampah bermasalah di Bali lengkap dengan pinpoint lokasi, kategori, tingkat keparahan, dan bukti foto/video.">
+
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/keyframe.css">
+    <link rel="stylesheet" href="../css/map.css">
+    <link rel="stylesheet" href="../css/form.css">
+
+    <link rel="icon" type="image/png" href="../favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="shortcut icon" href="../favicon.ico" />
+
+    <!-- Leaflet.js + OpenStreetMap: peta interaktif gratis, tanpa API key -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Langsung ke konten utama</a>
+
+    <header class="site-header">
+        <nav>
+            <a class="web-logo" href="../index.html">
+                <img src="../media/logo.png" alt="Logo Bali Waste Management">
+                <span>Bali Waste Management</span>
+            </a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="Buka menu navigasi">
+                <span></span><span></span><span></span>
+            </button>
+            <ul id="primary-menu">
+                <li><a href="../index.html#beranda">Beranda</a></li>
+                <li><a href="./buat-laporan.html" class="active">Buat Laporan</a></li>
+                <li><a href="./peta-sampah.html">Peta Laporan</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="page-hero page-hero--shadow">
+            <div class="container">
+                <span class="section-eyebrow">Laporkan Sekarang</span>
+                <h1>Buat Laporan Titik Sampah</h1>
+                <p>Isi formulir di bawah selengkap mungkin. Semakin lengkap data yang kamu berikan, semakin cepat petugas dapat menindaklanjuti laporanmu.</p>
+            </div>
+        </section>
+
+        <section class="form-section">
+            <div class="container">
+                <div class="form-layout">
+                    <div class="form-card">
+                        <form id="report-form" novalidate>
+                            <!-- ===== Kelompok 1: Informasi Pelapor ===== -->
+                            <fieldset class="form-fieldset">
+                                <legend class="fieldset-legend"><span class="step-badge">1</span> Informasi Pelapor</legend>
+
+                                <div class="field">
+                                    <label for="reporter-name">Nama Pelapor <span class="optional-tag">(Opsional)</span></label>
+                                    <input type="text" id="reporter-name" name="reporter_name" placeholder="Contoh: Made Wirawan" autocomplete="name">
+                                    <span class="hint">Kosongkan jika kamu ingin melapor secara anonim.</span>
+                                </div>
+                            </fieldset>
+
+                            <!-- ===== Kelompok 2: Lokasi Kejadian ===== -->
+                            <fieldset class="form-fieldset">
+                                <legend class="fieldset-legend"><span class="step-badge">2</span> Lokasi Kejadian</legend>
+
+                                <div class="field">
+                                    <label for="address">Alamat Tempat Masalah <span aria-hidden="true">*</span></label>
+                                    <textarea id="address" name="address" rows="2" placeholder="Contoh: Jl. Raya Canggu, dekat Jembatan Tukad Cangkir, Badung" required></textarea>
+                                </div>
+
+                                <div class="field">
+                                    <label>Pinpoint Pada Peta <span aria-hidden="true">*</span></label>
+                                    <span class="hint">Klik pada peta untuk menandai titik lokasi persis. Penanda bisa digeser jika kurang tepat.</span>
+                                    <div class="map-picker-shell">
+                                        <div id="map-picker" class="map-picker"></div>
+                                    </div>
+                                    <div class="map-coords" id="coord-text">Belum ada lokasi yang dipilih.</div>
+                                    <span class="hint" id="pin-error" style="color:var(--severity-high); display:none;"></span>
+                                    <input type="hidden" id="latitude" name="latitude">
+                                    <input type="hidden" id="longitude" name="longitude">
+                                </div>
+                            </fieldset>
+
+                            <!-- ===== Kelompok 3: Detail Sampah ===== -->
+                            <fieldset class="form-fieldset">
+                                <legend class="fieldset-legend"><span class="step-badge">3</span> Detail Sampah</legend>
+
+                                <div class="field">
+                                    <label for="evidence-file">Foto / Video Bukti <span aria-hidden="true">*</span></label>
+                                    <div class="upload-zone" id="upload-zone">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+                                        <strong>Seret file ke sini atau klik untuk unggah</strong>
+                                        <p>Format JPG, PNG, atau MP4, maksimal 10MB</p>
+                                        <input type="file" id="evidence-file" name="evidence_file" accept="image/*,video/*" required>
+                                    </div>
+                                    <span class="upload-filename" id="upload-filename"></span>
+                                </div>
+
+                                <div class="field">
+                                    <label for="category">Kategori Sampah <span aria-hidden="true">*</span></label>
+                                    <select id="category" name="waste_category" required>
+                                        <option value="" disabled selected>Pilih kategori sampah</option>
+                                        <option value="organik">Sampah Organik</option>
+                                        <option value="anorganik">Sampah Anorganik (Plastik, Kertas, Logam, Kaca)</option>
+                                        <option value="elektronik">Sampah Elektronik (E-Waste)</option>
+                                        <option value="b3">Limbah B3 (Bahan Berbahaya)</option>
+                                        <option value="medis">Sampah Medis</option>
+                                        <option value="lainnya">Lainnya</option>
+                                    </select>
+                                </div>
+
+                                <div class="field">
+                                    <label>Tingkat Keparahan <span aria-hidden="true">*</span></label>
+                                    <div class="severity-group">
+                                        <div class="severity-option severity-option--low">
+                                            <input type="radio" id="severity-low" name="severity" value="low" required>
+                                            <label for="severity-low"><span class="dot"></span>Rendah</label>
+                                        </div>
+                                        <div class="severity-option severity-option--medium">
+                                            <input type="radio" id="severity-medium" name="severity" value="medium">
+                                            <label for="severity-medium"><span class="dot"></span>Sedang</label>
+                                        </div>
+                                        <div class="severity-option severity-option--high">
+                                            <input type="radio" id="severity-high" name="severity" value="high">
+                                            <label for="severity-high"><span class="dot"></span>Tinggi</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label for="description">Deskripsi Tambahan <span class="optional-tag">(Opsional)</span></label>
+                                    <textarea id="description" name="description" rows="4" maxlength="300" placeholder="Ceritakan detail tambahan yang mungkin membantu petugas, misalnya sudah berapa lama sampah menumpuk di lokasi ini."></textarea>
+                                    <span class="char-counter" id="description-counter">0 / 300</span>
+                                </div>
+                            </fieldset>
+
+                            <div class="form-actions">
+                                <button type="reset" class="btn btn-outline btn-outline-remove">Bersihkan Form</button>
+                                <button type="submit" class="btn btn-primary">Kirim Laporan</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <aside class="sidebar-stack">
+                        <div class="summary-card">
+                            <h3>Ringkasan Laporan</h3>
+                            <ul class="summary-list">
+                                <li><span>Alamat</span><span id="summary-address">Belum diisi</span></li>
+                                <li><span>Koordinat</span><span id="summary-location">Belum dipilih</span></li>
+                                <li><span>Kategori</span><span id="summary-category">Belum dipilih</span></li>
+                                <li><span>Keparahan</span><span id="summary-severity">Belum dipilih</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="tips-card">
+                            <h3>Tips Laporan yang Baik</h3>
+                            <ul>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="m5 13 4 4L19 7"/></svg>Pastikan pinpoint lokasi setepat mungkin agar mudah ditemukan petugas.</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="m5 13 4 4L19 7"/></svg>Sertakan foto/video yang jelas menunjukkan kondisi sampah.</li>
+                                <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="m5 13 4 4L19 7"/></svg>Pilih tingkat keparahan sesuai kondisi sebenarnya di lapangan.</li>
+                            </ul>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a class="web-logo" href="../index.html">
+                        <img src="../media/logo.png" alt="Logo Bali Waste Management">
+                        <span>Bali Waste Management</span>
+                    </a>
+                    <p>Terima kasih telah meluangkan waktu untuk melaporkan dan membantu membersihkan Bali dari masalah sampah. Setiap laporan sangat berarti bagi lingkungan kita.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram Bali Waste Management"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
+                        <a href="#" aria-label="TikTok Bali Waste Management"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M14 3v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.5 2 4 4.5 4.3"/></svg></a>
+                        <a href="#" aria-label="Facebook Bali Waste Management"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M15 8h2V5h-2a4 4 0 0 0-4 4v2H9v3h2v7h3v-7h2.2l.8-3H14V9a1 1 0 0 1 1-1Z"/></svg></a>
+                        <a href="#" aria-label="YouTube Bali Waste Management"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="m10 9.5 5 2.5-5 2.5Z" fill="currentColor" stroke="none"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer-menu">
+                    <h3 class="footer-heading">Menu Utama</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html#beranda">Beranda</a></li>
+                        <li><a href="./buat-laporan.html">Buat Laporan</a></li>
+                        <li><a href="./peta-sampah.html">Peta Laporan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact-wrap">
+                    <h3 class="footer-heading">Kontak Admin</h3>
+                    <ul class="footer-contact">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 6 8 7 8-7"/></svg><span>admin@baliwastemanagement.id</span></li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg><span>+62 812-3456-7890</span></li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 22s7-6.5 7-12A7 7 0 0 0 5 10c0 5.5 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Denpasar, Bali, Indonesia</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; <span id="footer-year">2026</span> Bali Waste Management. Hak cipta dilindungi.</span>
+                <span>Dibuat untuk proyek akhir semester.</span>
+            </div>
+        </div>
+    </footer>
+
+    <div class="toast" id="form-toast">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span>Laporan berhasil disiapkan!</span>
+    </div>
+
+    <!-- Leaflet.js: library peta open-source, dimuat lewat CDN tanpa API key -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script defer src="../js/main.js"></script>
+    <script defer src="../js/form.js"></script>
+</body>
+</html>

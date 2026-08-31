@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<script>document.documentElement.classList.add("js");</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bali Waste Management — Laporkan Sampah, Jaga Bali</title>
+    <meta name="description" content="Platform pelaporan masyarakat untuk masalah sampah di Bali. Buat laporan lengkap dengan pinpoint lokasi dan pantau titik sampah lewat peta interaktif.">
+
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/keyframe.css">
+    <script defer src="./js/main.js"></script>
+
+    <link rel="icon" type="image/png" href="./favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="shortcut icon" href="./favicon.ico">
+
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Langsung ke konten utama</a>
+
+    <header class="site-header">
+        <nav>
+            <a class="web-logo" href="#beranda">
+                <img src="./media/logo.png" alt="Logo Bali Waste Management">
+                <span>Bali Waste Management</span>
+            </a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="Buka menu navigasi">
+                <span></span><span></span><span></span>
+            </button>
+            <ul id="primary-menu">
+                <li><a href="#beranda" class="active">Beranda</a></li>
+                <li><a href="./pages/buat-laporan.html">Buat Laporan</a></li>
+                <li><a href="./pages/peta-sampah.html">Peta Laporan</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- ============ SECTION 1: HERO ============ -->
+        <section id="beranda">
+            <div class="container-main-hero">
+                <div class="hero">
+                    <!-- hero-panel: satu wadah tunggal untuk teks sambutan + CTA, -->
+                    <!-- dengan foto sebagai latar dan lapisan dimming agar teks tetap terbaca. -->
+                    <div class="hero-panel">
+                        <div class="hero-panel-overlay"></div>
+                        <div class="hero-panel-content">
+                            <h1>Selamat Datang Di <br><span>Bali Waste Management</span></h1>
+                            <p class="hero-slogan">Bersama Jaga Kebersihan Bali, Satu Laporan Setiap Waktu</p>
+                            <p>Setiap laporan bisa jadi langkah awal dalam penanganan sampah di lingkunganmu. Tandai lokasinya, sertakan buktinya, dan biarkan tim terkait untuk ditindak lanjuti.<br><span> — SEMUA BISA LANGSUNG DILAKUKAN DISINI —</span></p>
+                            <div class="cta">
+                                <a class="btn btn-primary" href="./pages/buat-laporan.html">Buat Laporan</a>
+                                <a class="btn btn-outline" href="./pages/peta-sampah.html">Lihat Peta</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carousel horizontal, bergerak kanan ke kiri, infinite loop -->
+                    <div class="hero-carousel" aria-hidden="true">
+                        <div class="hero-carousel-track">
+                            <div class="hero-carousel-item"><div class="photo-frame"><img src="./media/teletabis-trash-can.jpg" alt="image1"></div></div>
+                            <div class="hero-carousel-item"><div class="photo-frame"><img src="./media/garbage5.jpg" alt="image2"></div></div>
+                            <div class="hero-carousel-item"><div class="photo-frame"><img src="./media/garbage1.jpg" alt="image3"></div></div>
+                            <div class="hero-carousel-item"><div class="photo-frame"><img src="./media/garbage2.jpg" alt="image4"></div></div>
+                            <div class="hero-carousel-item"><div class="photo-frame"><img src="./media/garbage3.jpg" alt="image5"></div></div>
+                            <div class="hero-carousel-item"><div class="photo-frame"><img src="./media/garbage4.jpg" alt="image6"></div></div>
+                            <!-- Konten digandakan agar loop terlihat mulus (lihat keyframe hero-scroll) -->
+                            <div class="hero-carousel-item" aria-hidden="true"><div class="photo-frame"><img src="./media/teletabis-trash-can.jpg" alt="image1"></div></div>
+                            <div class="hero-carousel-item" aria-hidden="true"><div class="photo-frame"><img src="./media/garbage5.jpg" alt="image2"></div></div>
+                            <div class="hero-carousel-item" aria-hidden="true"><div class="photo-frame"><img src="./media/garbage1.jpg" alt="image3"></div></div>
+                            <div class="hero-carousel-item" aria-hidden="true"><div class="photo-frame"><img src="./media/garbage2.jpg" alt="image4"></div></div>
+                            <div class="hero-carousel-item" aria-hidden="true"><div class="photo-frame"><img src="./media/garbage3.jpg" alt="image5"></div></div>
+                            <div class="hero-carousel-item" aria-hidden="true"><div class="photo-frame"><img src="./media/garbage4.jpg" alt="image6"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION 2: TENTANG MASALAH & TUJUAN ============ -->
+        <section id="tentang" class="about">
+            <div class="container">
+                <span class="section-eyebrow reveal">Mengapa Ini Penting</span>
+                <h2 class="section-heading reveal">Sampah Masih Jadi Pekerjaan Rumah Besar Bagi Bali</h2>
+
+                <!-- Setiap paragraf punya headline sendiri: masalah, lalu tujuan website -->
+                <div class="about-intro">
+                    <div class="about-block reveal">
+                        <h3 class="about-block-title">Masalah yang Kita Hadapi</h3>
+                        <p>Bali menghadapi tekanan sampah yang terus bertambah setiap tahun, didorong oleh pertumbuhan penduduk dan tingginya kunjungan wisatawan. Sayangnya, kapasitas tempat pembuangan akhir semakin terbatas, sehingga banyak titik sampah liar bermunculan di pinggir jalan, aliran sungai, hingga kawasan pesisir akibat keterlambatan penanganan dan minimnya informasi lokasi yang akurat bagi petugas kebersihan.</p>
+                    </div>
+                    <div class="about-block reveal">
+                        <h3 class="about-block-title">Tujuan Bali Waste Management</h3>
+                        <p>Bali Waste Management hadir sebagai jembatan antara masyarakat dan pihak yang menangani kebersihan. Lewat laporan berbasis lokasi, siapa pun bisa menandai titik sampah bermasalah secara cepat, sementara petugas dan relawan dapat memantau serta memprioritaskan penanganan lewat peta interaktif yang selalu diperbarui.</p>
+                    </div>
+                </div>
+
+                <!-- Kartu 1: alasan menjaga keasrian Bali dari masalah sampah -->
+                <h3 class="about-subheading reveal">Kenapa Kita Harus Peduli</h3>
+                <div class="about-points">
+                    <div class="about-point-card reveal">
+                        <div class="about-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M5 21c0-8 5-14 14-16-1 9-6 14-14 16Z"/><path d="M5 21c2-3 4-5 7-7"/></svg></div>
+                        <h3>Menjaga Ekosistem</h3>
+                        <p>Sampah yang menumpuk mencemari tanah, sungai, dan laut, sehingga mengancam kelestarian flora dan fauna khas Bali.</p>
+                    </div>
+                    <div class="about-point-card reveal">
+                        <div class="about-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></div>
+                        <h3>Menjaga Pariwisata</h3>
+                        <p>Keindahan alam adalah aset utama Bali; lingkungan yang bersih menjaga kenyamanan wisatawan sekaligus pendapatan masyarakat.</p>
+                    </div>
+                    <div class="about-point-card reveal">
+                        <div class="about-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 21s-7-4.5-9.5-9C1 8 2.5 4.5 6 4c2-.3 3.7.7 6 3 2.3-2.3 4-3.3 6-3 3.5.5 5 4 3.5 8-2.5 4.5-9.5 9-9.5 9Z"/></svg></div>
+                        <h3>Menjaga Kesehatan</h3>
+                        <p>Tumpukan sampah yang tidak tertangani bisa menjadi sumber penyakit dan mencemari sumber air bersih warga sekitar.</p>
+                    </div>
+                    <div class="about-point-card reveal">
+                        <div class="about-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 21V10l8-6 8 6v11"/><path d="M9 21v-6h6v6"/></svg></div>
+                        <h3>Menjaga Budaya &amp; Spiritualitas</h3>
+                        <p>Alam yang asri adalah bagian tak terpisahkan dari nilai budaya dan kehidupan spiritual masyarakat Bali sehari-hari.</p>
+                    </div>
+                </div>
+
+                <!-- Kartu 2: keunggulan platform Bali Waste Management -->
+                <h3 class="about-subheading reveal">Keunggulan Bali Waste Management</h3>
+                <div class="about-points">
+                    <div class="about-point-card reveal">
+                        <div class="about-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg></div>
+                        <h3>Respons Lebih Cepat</h3>
+                        <p>Laporan real-time membantu tim kebersihan menindaklanjuti titik sampah tanpa menunggu laporan manual yang lambat sampai.</p>
+                    </div>
+                    <div class="about-point-card reveal">
+                        <div class="about-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="currentColor" stroke="none"/></svg></div>
+                        <h3>Lokasi Presisi</h3>
+                        <p>Pinpoint pada peta memastikan petugas langsung menuju titik yang tepat tanpa salah alamat atau kehilangan waktu di lapangan.</p>
+                    </div>
+                    <div class="about-point-card reveal">
+                        <div class="about-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.3"/><path d="M15.5 14.2c2.3.3 4.5 2 4.5 5.8"/></svg></div>
+                        <h3>Siapa Saja Bisa Berkontribusi</h3>
+                        <p>Tidak perlu jadi petugas resmi — warga maupun wisatawan bisa ikut menjaga kebersihan Bali lewat satu laporan sederhana.</p>
+                    </div>
+                    <div class="about-point-card reveal">
+                        <div class="about-point-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+                        <h3>Transparan &amp; Terpantau</h3>
+                        <p>Perkembangan setiap laporan bisa dipantau bersama lewat peta interaktif, dari status aktif hingga selesai ditangani.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ SECTION 3: STATISTIK ============ -->
+        <section id="statistik" class="stats">
+            <div class="container">
+                <span class="section-eyebrow reveal">Data Terkini</span>
+                <h2 class="section-heading reveal">Perkembangan Laporan Dari Masyarakat</h2>
+                <div class="stats-grid">
+                    <div class="stat-card reveal">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="6" y="4" width="12" height="16" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 10h6M9 14h6M9 18h3"/></svg></div>
+                        <span class="stat-number" data-target="50">0</span>
+                        <p class="stat-label">Total Laporan Dibuat</p>
+                    </div>
+                    <div class="stat-card reveal">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></div>
+                        <span class="stat-number" data-target="36">0</span>
+                        <p class="stat-label">Laporan Selesai Ditangani</p>
+                    </div>
+                    <div class="stat-card reveal">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 22s7-6.5 7-12A7 7 0 0 0 5 10c0 5.5 7 12 7 12Z"/><path d="M12 8v4M12 15h.01"/></svg></div>
+                        <span class="stat-number">Kuta Utara, Badung</span>
+                        <p class="stat-label">Area Terpantau Paling Banyak Laporan</p>
+                    </div>
+                    <div class="stat-card reveal">
+                        <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 22s7-6.5 7-12A7 7 0 0 0 5 10c0 5.5 7 12 7 12Z"/><path d="M12 7v3l2 1.5"/></svg></div>
+                        <span class="stat-number">Tiara Gatsu, Denpasar</span>
+                        <p class="stat-label">Lokasi Terkini Dilaporkan</p>
+                    </div>
+                </div>
+                <p class="stat-note reveal">*Data di atas merupakan sebuah contoh dan akan diganti jika website sudah dihubungkan ke database.</p>
+            </div>
+        </section>
+
+        <!-- ============ SECTION 4: DOKUMENTASI RELAWAN ============ -->
+        <section id="dokumentasi" class="gallery">
+            <div class="container">
+                <span class="section-eyebrow reveal">Aksi Nyata</span>
+                <h2 class="section-heading reveal">Dokumentasi Aksi Bersih-Bersih Relawan</h2>
+
+                <div class="gallery-carousel reveal">
+                    <button type="button" class="gallery-nav gallery-nav--prev" id="gallery-prev" aria-label="Lihat foto sebelumnya">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+                    </button>
+
+                    <div class="gallery-track" id="gallery-track">
+                        <div class="gallery-item"><div class="photo-frame"><img src="./media/beach-cleanup2.jpg" alt="image1"></div></div>
+                        <div class="gallery-item"><div class="photo-frame"><img src="./media/beach-cleanup3.jpg" alt="image2"></div></div>
+                        <div class="gallery-item"><div class="photo-frame"><img src="./media/cleanup.jpeg" alt="image3"></div></div>
+                        <div class="gallery-item"><div class="photo-frame"><img src="./media/field-cleanup.jpeg" alt="image4"></div></div>
+                        <div class="gallery-item"><div class="photo-frame"><img src="./media/field-cleanup2.jpg" alt="image5"></div></div>
+                        <div class="gallery-item"><div class="photo-frame"><img src="./media/field-cleanup3.jpg" alt="image6"></div></div>
+                        <div class="gallery-item"><div class="photo-frame"><img src="./media/field-cleanup4.jpg" alt="image7"></div></div>
+                        <div class="gallery-item"><div class="photo-frame"><img src="./media/field-cleanup5.jpg" alt="image8"></div></div>
+                        <div class="gallery-item"><div class="photo-frame"><img src="./media/field-cleanup6.jpg" alt="image9"></div></div>
+                        <div class="gallery-item"><div class="photo-frame"><img src="./media/pura-cleanup.jpg" alt="image10"></div></div>
+                    </div>
+
+                    <button type="button" class="gallery-nav gallery-nav--next" id="gallery-next" aria-label="Lihat foto berikutnya">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                </div>
+
+                <div class="gallery-cta">
+                    <div class="cta">
+                        <a class="btn btn-primary" href="./pages/buat-laporan.html">Buat Laporan</a>
+                        <a class="btn btn-outline" href="./pages/peta-sampah.html">Lihat Peta</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a class="web-logo" href="#beranda">
+                        <img src="./media/logo.png" alt="Logo Bali Waste Management">
+                        <span>Bali Waste Management</span>
+                    </a>
+                    <p>Terima kasih telah meluangkan waktu untuk melaporkan dan membantu membersihkan Bali dari masalah sampah. Setiap laporan sangat berarti bagi lingkungan kita.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Instagram Bali Waste Management"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
+                        <a href="#" aria-label="TikTok Bali Waste Management"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M14 3v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.5 2.5 2 4 4.5 4.3"/></svg></a>
+                        <a href="#" aria-label="Facebook Bali Waste Management"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M15 8h2V5h-2a4 4 0 0 0-4 4v2H9v3h2v7h3v-7h2.2l.8-3H14V9a1 1 0 0 1 1-1Z"/></svg></a>
+                        <a href="#" aria-label="YouTube Bali Waste Management"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="m10 9.5 5 2.5-5 2.5Z" fill="currentColor" stroke="none"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer-menu">
+                    <h3 class="footer-heading">Menu Utama</h3>
+                    <ul class="footer-links">
+                        <li><a href="#beranda">Beranda</a></li>
+                        <li><a href="./pages/buat-laporan.html">Buat Laporan</a></li>
+                        <li><a href="./pages/peta-sampah.html">Peta Laporan</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact-wrap">
+                    <h3 class="footer-heading">Kontak Admin</h3>
+                    <ul class="footer-contact">
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 6 8 7 8-7"/></svg><span>admin@baliwastemanagement.id</span></li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg><span>+62 812-3456-7890</span></li>
+                        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 22s7-6.5 7-12A7 7 0 0 0 5 10c0 5.5 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Denpasar, Bali, Indonesia</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; <span id="footer-year">2026</span> Bali Waste Management. Hak cipta dilindungi.</span>
+                <span>Dibuat untuk proyek akhir semester.</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

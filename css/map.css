@@ -1,0 +1,311 @@
+/* ======================================================= */
+/* GOOGLE MAPS / LEAFLET — styling peta interaktif           */
+/* ======================================================= */
+
+.map-section {
+    padding-block: var(--section-padding);
+}
+
+/* ---------- Panel filter ---------- */
+
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: clamp(1rem, 0.85rem + 0.8vw, 2rem);
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: clamp(1.25rem, 1.1rem + 0.8vw, 1.75rem);
+    margin-bottom: clamp(1.25rem, 1.1rem + 0.8vw, 2rem);
+}
+
+.filter-toggle {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--primary);
+    border: 1.5px solid rgba(2, 136, 209, 0.35);
+    border-radius: var(--radius-pill);
+    padding: 0.65rem 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.filter-toggle svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    stroke: currentColor;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.filter-group-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #6B7280;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.filter-chip {
+    position: relative;
+}
+
+.filter-chip input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.filter-chip input:focus-visible + label {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.filter-chip label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.5rem 0.95rem;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid #E5E7EB;
+    color: #4B5563;
+    cursor: pointer;
+    transition: all 160ms ease;
+    white-space: nowrap;
+}
+
+.filter-chip .dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.filter-chip--low .dot { background: var(--severity-low); }
+.filter-chip--medium .dot { background: var(--severity-medium); }
+.filter-chip--high .dot { background: var(--severity-high); }
+
+.filter-chip input:checked + label {
+    border-color: var(--primary);
+    background: rgba(2, 136, 209, 0.08);
+    color: var(--primary);
+}
+
+.filter-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.results-count {
+    font-size: 0.85rem;
+    color: #6B7280;
+}
+
+.results-count strong {
+    color: var(--text-color);
+}
+
+.filter-reset {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* ---------- Kontainer peta ---------- */
+
+.map-shell {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(31, 41, 55, 0.06);
+    /* Mengurung z-index internal Leaflet supaya tidak pernah menimpa navbar */
+    isolation: isolate;
+}
+
+.leaflet-map {
+    width: 100%;
+    height: clamp(24rem, 20rem + 18vw, 42rem);
+    background: #E5E7EB;
+}
+
+/* ---------- Legenda ---------- */
+
+.map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(1rem, 0.85rem + 0.6vw, 1.75rem);
+    margin-top: clamp(1rem, 0.85rem + 0.6vw, 1.5rem);
+    font-size: 0.85rem;
+    color: #4B5563;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-dot {
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 1px rgba(31, 41, 55, 0.15);
+}
+
+.legend-dot--low { background: var(--severity-low); }
+.legend-dot--medium { background: var(--severity-medium); }
+.legend-dot--high { background: var(--severity-high); }
+
+/* ---------- Custom marker Leaflet (divIcon) ---------- */
+
+.marker-pin {
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    border: 2px solid var(--white);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.marker-pin::after {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--white);
+    border-radius: 50%;
+    transform: rotate(45deg);
+}
+
+.marker-pin--low { background: var(--severity-low); }
+.marker-pin--medium { background: var(--severity-medium); }
+.marker-pin--high { background: var(--severity-high); animation: marker-pulse 2.2s infinite; }
+.marker-pin--select { background: var(--primary); animation: marker-pulse 2.2s infinite; }
+
+/* ---------- Popup Leaflet kustom ---------- */
+
+.leaflet-popup-content-wrapper {
+    border-radius: var(--radius-md);
+    padding: 0;
+    overflow: hidden;
+}
+
+.leaflet-popup-content {
+    margin: 0;
+    width: clamp(15rem, 14rem + 6vw, 18rem) !important;
+}
+
+.popup-card .photo-frame {
+    aspect-ratio: 16 / 10;
+    border-radius: 0;
+}
+
+.popup-body {
+    padding: 0.9rem 1rem 1.1rem;
+}
+
+.popup-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-pill);
+    margin-bottom: 0.55rem;
+}
+
+.popup-status--active {
+    background: rgba(2, 136, 209, 0.12);
+    color: var(--primary);
+}
+
+.popup-status--done {
+    background: rgba(67, 160, 71, 0.14);
+    color: var(--secondary-dark);
+}
+
+.popup-address {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.92rem;
+    margin-bottom: 0.35rem;
+}
+
+.popup-meta {
+    font-size: 0.78rem;
+    color: #6B7280;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.popup-severity {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.popup-severity .dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+}
+
+/* ---------- Responsif ---------- */
+
+@media (max-width: 860px) {
+    .filter-toggle {
+        display: inline-flex;
+    }
+
+    .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+        max-height: 0;
+        padding-block: 0;
+        margin-bottom: 1rem;
+        overflow: hidden;
+        transition: max-height 260ms ease, padding 260ms ease;
+    }
+
+    .filter-bar.is-open {
+        max-height: 40rem;
+        padding: clamp(1.25rem, 1.1rem + 0.8vw, 1.75rem);
+    }
+
+    .filter-actions {
+        margin-left: 0;
+        justify-content: space-between;
+    }
+}
