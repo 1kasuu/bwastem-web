@@ -18,6 +18,7 @@
     --secondary-dark: #2E7D32;
     --secondary-light: #81C784;
     --white: #FFFFFF;
+    --secondary-hero-span: #2eb635;
 
     /* Warna status tingkat keparahan laporan */
     --severity-low: var(--secondary);
@@ -316,7 +317,7 @@ select:focus-visible,
 .photo-frame span {
     font-size: clamp(0.7rem, 0.65rem + 0.15vw, 0.8rem);
     font-family: var(--font-body);
-    text-align: center;
+    text-align: left;
     padding-inline: 0.5rem;
 }
 
@@ -333,7 +334,7 @@ select:focus-visible,
 nav {
     display: flex;
     position: relative;
-    background-image: linear-gradient(to top, #76cfff, #2fb6ff);
+    background-image: linear-gradient(to top, #6ba7c8, #239fe3);
     font-family: var(--font-display);
     width: 100%;
     min-height: clamp(4rem, 3.6rem + 1vw, 4.75rem);
@@ -468,7 +469,7 @@ nav ul a.active {
     width: 100%;
     /* border-radius: 0 0 var(--radius-md) var(--radius-md); */
     overflow: hidden;
-    background-image: url("../media/beach-cleanup.jpg");
+    background-image: url("../media/beach-cleanup.webp");
     background-size: cover;
     background-position: bottom;
     box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.15);
@@ -477,7 +478,7 @@ nav ul a.active {
 .hero-panel-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(209, 209, 209, 0.7);
+    background: rgba(172, 178, 182, 0.7);
 }
 
 .hero-panel-content {
@@ -488,18 +489,18 @@ nav ul a.active {
     align-items: center;
     gap: clamp(1.25rem, 1rem + 1vw, 1.75rem);
     text-align: center;
-    padding: clamp(7rem, 1.5rem + 2.5vw, 3.75rem) clamp(1.5rem, 1.2rem + 2vw, 3.5rem);
+    padding: clamp(9rem, 1.5rem + 2.5vw, 3.75rem) clamp(1.5rem, 1.2rem + 2vw, 3.5rem);
 }
 
 .hero-panel-content h1 {
-    color: var(--text-color);
+    color: var(--white);
     font-family: var(--font-display);
     font-weight: 700;
     font-size: clamp(1.9rem, 1.5rem + 2.2vw, 3.1rem);
 }
 
 .hero-panel-content h1 span {
-    color: var(--secondary);
+    color: var(--secondary-hero-span);
 }
 
 /* Slogan diposisikan tepat di bawah ucapan selamat datang (h1) */
@@ -511,29 +512,17 @@ nav ul a.active {
     margin-top: -0.5rem;
     padding: 2px 8px 2px 8px;
     border-radius: 10px;
-    background-color: #5fc2ff66;
+    background-color: #5fc2ff9d;
     box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .hero-panel-content p:not(.hero-slogan) {
-    color: #4B5563;
+    color: var(--white);
     font-family: var(--font-body);
     font-weight: 500;
     font-size: clamp(0.9rem, 0.85rem + 0.25vw, 1.05rem);
     max-width: 62ch;
     margin-inline: auto;
-}
-.hero-panel-content p:not(.hero-slogan) {
-    -webkit-text-stroke: 0.3px black;
-}
-.hero-panel-content p span {
-    -webkit-text-stroke: 0;
-    font-size: clamp(0.75rem, 0.7rem + 0.15vw, 1.05rem);
-    color: var(--background);
-    background-color: #43a048b3;
-    padding: 2px 8px 2px 8px;
-    border-radius: 4px;
-    box-shadow: 1px 3px 8px rgba(0, 0, 0, 0.2);
 }
 
 .cta {
@@ -622,8 +611,8 @@ nav ul a.active {
 .about-block p {
     color: #4B5563;
     font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
-    text-align: justify;
-    text-align-last: center;
+    text-align: left;
+    text-align-last: left;
 }
 
 /* Label di atas tiap grup kartu (alasan peduli / keunggulan platform) */
@@ -988,7 +977,7 @@ nav ul a.active {
 .page-hero {
     position: relative;
     overflow: hidden;
-    background-image: url("../media/garbage-truck-bg.jpg");
+    background-image: url("../media/garbage-truck-bg.webp");
     background-size: cover;
     background-position: center;
     color: var(--white);
@@ -1002,7 +991,7 @@ nav ul a.active {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(225deg, rgba(0, 147, 227, 0.8), rgba(0, 131, 201, 0.8));
+    background: radial-gradient(circle farthest-corner at center, rgba(107, 152, 156, 0.8), rgba(20, 148, 217, 0.8));
 }
 
 .page-hero > .container {
